@@ -94,7 +94,7 @@ getter_and_setter  18.21M ( 54.92ns) (± 2.20%)  1.03× slower
 
 ### Array
 
-#### `Array#[0)` vs `Array#first` [code](code/array/array_frist_vs_index.cr)
+#### `Array#[0]` vs `Array#first` [code](code/array/array_frist_vs_index.cr)
 
 ```
 RUN crystal build --release code/array/array_frist_vs_index.cr -o bin/array/array_frist_vs_index_benchmark
@@ -104,7 +104,7 @@ RUN ./bin/array/array_frist_vs_index_benchmark with Crystal 0.22.0 (2017-04-20) 
 Array#first 372.56M (  2.68ns) (±12.96%)  1.02× slower
 ```
 
-#### `Array#[-1)` vs `Array#last`[code](code/array/array_last_vs_index.cr)
+#### `Array#[-1]` vs `Array#last`[code](code/array/array_last_vs_index.cr)
 
 ```
 RUN crystal build --release code/array/array_last_vs_index.cr -o bin/array/array_last_vs_index_benchmark
@@ -145,6 +145,41 @@ RUN ./bin/enumerable/each_push_vs_map_benchmark with Crystal 0.22.0 (2017-04-20)
              Array#map 175.57k (   5.7µs) (± 0.71%)       fastest
      Array#each + push 108.44k (  9.22µs) (± 3.68%)  1.62× slower
 Array#each_with_object 109.23k (  9.16µs) (± 2.23%)  1.61× slower
+```
+
+#### `each` vs `For Loop` [code](code/enumerable/each_vs_loop.cr)
+
+```
+RUN crystal build --release code/enumerable/each_vs_loop.cr -o bin/enumerable/each_vs_loop_benchmark
+RUN ./bin/enumerable/each_vs_loop_benchmark with Crystal 0.22.0 (2017-04-20) LLVM 4.0.0
+
+For loop 453.52M (   2.2ns) (±17.21%)       fastest
+   #each 373.48M (  2.68ns) (±12.22%)  1.21× slower
+```
+
+#### `each_with_index` vs `while loop` [code](code/enumerable/each_vs_loop.cr)
+
+```
+
+```
+
+
+#### `map.flatten` vs `flat_map` [code](code/enumerable/each_vs_loop.cr)
+
+```
+
+```
+
+#### `reverse.each` vs `reverse_each` [code](code/enumerable/each_vs_loop.cr)
+
+```
+
+```
+
+#### `sort` vs `sort_by` [code](code/enumerable/each_vs_loop.cr)
+
+```
+
 ```
 
 ### Hash

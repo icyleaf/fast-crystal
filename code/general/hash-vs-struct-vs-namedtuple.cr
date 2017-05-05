@@ -19,10 +19,6 @@ def fasttest
   {name: "Crystal", year: 2011}
 end
 
-def slow3
-  SampleStruct2.new "Crystal", 2011
-end
-
 Benchmark.ips do |x|
   x.report("NamedTuple")  { fasttest }
   x.report("Struct")      { fast }
