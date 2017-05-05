@@ -49,7 +49,6 @@ end
 - [Hash](#hash)
 - [Proc & Block](#proc--block)
 - [String](#string)
-- [Range](#range)
 
 ### General
 
@@ -115,7 +114,7 @@ Array#[-1] 381.04M (  2.62ns) (±13.45%)       fastest
 Array#last 375.41M (  2.66ns) (±12.90%)  1.02× slower
 ```
 
-#### `Array#insert` vs `Array#unshift`[code](code/)
+#### `Array#insert` vs `Array#unshift`[code](code/array/insert_vs_unshift.cr)
 
 ```
 RUN crystal build --release code/array/insert_vs_unshift.cr -o bin/array/insert_vs_unshift_benchmark
@@ -125,9 +124,28 @@ RUN ./bin/array/insert_vs_unshift_benchmark with Crystal 0.22.0 (2017-04-20) LLV
 Array#unshift    1.3  (771.72ms) (± 3.68%)  1.01× slower
 ```
 
-### General
+#### `Range#to_a` vs `Times# [code](code/array/range_vs_time_map.cr)
+
+```
+RUN crystal build --release code/array/range_vs_time_map.cr -o bin/array/range_vs_time_map_benchmark
+RUN ./bin/array/range_vs_time_map_benchmark with Crystal 0.22.0 (2017-04-20) LLVM 4.0.0
+
+Range#to_a 825.21k (  1.21µs) (± 0.85%)       fastest
+Times#to_a 793.87k (  1.26µs) (± 0.64%)  1.04× slower
+```
 
 ### Enumerable
+
+#### `map` vs `each + push` vs `each_with_object` [code](code/enumerable/each_push_vs_map.cr)
+
+```
+RUN crystal build --release code/enumerable/each_push_vs_map.cr -o bin/enumerable/each_push_vs_map_benchmark
+RUN ./bin/enumerable/each_push_vs_map_benchmark with Crystal 0.22.0 (2017-04-20) LLVM 4.0.0
+
+             Array#map 175.57k (   5.7µs) (± 0.71%)       fastest
+     Array#each + push 108.44k (  9.22µs) (± 3.68%)  1.62× slower
+Array#each_with_object 109.23k (  9.16µs) (± 2.23%)  1.61× slower
+```
 
 ### Hash
 
@@ -186,5 +204,3 @@ RUN ./bin/string/sub_vs_chomp_benchmark with Crystal 0.22.0 (2017-04-20) LLVM 4.
 String#chomp"string"  20.96M (  47.7ns) (± 5.11%)       fastest
   String#sub/regexp/   2.18M (458.96ns) (± 7.01%)  9.62× slower
 ```
-
-### Range

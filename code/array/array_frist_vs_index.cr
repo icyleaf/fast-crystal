@@ -1,6 +1,6 @@
 require "benchmark"
 
-ARRAY = [1..100]
+ARRAY = (1..100).to_a
 
 def fast
   ARRAY[0]
