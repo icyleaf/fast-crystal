@@ -10,7 +10,7 @@ All results listed in README.md are running with Crystal 0.22.0 (2017-04-20) LLV
 Machine information: MacBook Pro (Retina, 15-inch, Mid 2015), 2.2 GHz Intel Core i7, 16 GB 1600 MHz DDR3.
 Your results may vary, but you get the idea. : )
 
-**Let's write faster code, together! :trollface:**
+**Let's write faster code, together!  :trollface:**
 
 ## Measurement Tool
 
@@ -94,6 +94,36 @@ getter_and_setter  18.21M ( 54.92ns) (± 2.20%)  1.03× slower
 ```
 
 ### Array
+
+#### `Array#[0)` vs `Array#first` [code](code/array/array_frist_vs_index.cr)
+
+```
+RUN crystal build --release code/array/array_frist_vs_index.cr -o bin/array/array_frist_vs_index_benchmark
+RUN ./bin/array/array_frist_vs_index_benchmark with Crystal 0.22.0 (2017-04-20) LLVM 4.0.0
+
+  Array#[0] 380.82M (  2.63ns) (±12.68%)       fastest
+Array#first 372.56M (  2.68ns) (±12.96%)  1.02× slower
+```
+
+#### `Array#[-1)` vs `Array#last`[code](code/array/array_last_vs_index.cr)
+
+```
+RUN crystal build --release code/array/array_last_vs_index.cr -o bin/array/array_last_vs_index_benchmark
+RUN ./bin/array/array_last_vs_index_benchmark with Crystal 0.22.0 (2017-04-20) LLVM 4.0.0
+
+Array#[-1] 381.04M (  2.62ns) (±13.45%)       fastest
+Array#last 375.41M (  2.66ns) (±12.90%)  1.02× slower
+```
+
+#### `Array#insert` vs `Array#unshift`[code](code/)
+
+```
+RUN crystal build --release code/array/insert_vs_unshift.cr -o bin/array/insert_vs_unshift_benchmark
+RUN ./bin/array/insert_vs_unshift_benchmark with Crystal 0.22.0 (2017-04-20) LLVM 4.0.0
+
+ Array#insert    1.3  ( 767.5ms) (± 4.56%)       fastest
+Array#unshift    1.3  (771.72ms) (± 3.68%)  1.01× slower
+```
 
 ### General
 
