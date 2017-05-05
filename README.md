@@ -55,16 +55,22 @@ end
 ##### Parallel Assignment vs Sequential Assignment [code](code/general/assignment.cr)
 
 ```
-RUN crystal build --release code/general/assignment.cr -o bin/general/assignment_test
-RUN ./bin/general/assignment_test with Crystal 0.22.0 (2017-04-20) LLVM 4.0.0
+RUN crystal build --release code/general/assignment.cr -o bin/general/assignment_benchmark
+RUN ./bin/general/assignment_benchmark with Crystal 0.22.0 (2017-04-20) LLVM 4.0.0
 
-Sequential Assignment 462.22M (  2.16ns) (±16.84%)       fastest
-  Parallel Assignment  445.6M (  2.24ns) (±15.79%)  1.04× slower
+Sequential Assignment  445.6M (  2.24ns) (±16.59%)       fastest
+  Parallel Assignment 412.08M (  2.43ns) (±15.75%)  1.08× slower
 ```
 
-##### `begin...rescue` vs `respond_to?` for Control Flow [code](code/general/begin-rescue-vs-respond-to.cr)
+##### Positional arguments vs Named arguments [code](code/general/positional_argument_vs_named_argument.cr)
 
+```
+RUN crystal build --release code/general/positional_argument_vs_named_argument.cr -o bin/general/positional_argument_vs_named_argument_benchmark
+RUN ./bin/general/positional_argument_vs_named_argument_benchmark with Crystal 0.22.0 (2017-04-20) LLVM 4.0.0
 
+     Named arguments 472.76M (  2.12ns) (±17.01%)       fastest
+Positional arguments 455.11M (   2.2ns) (±17.72%)  1.04× slower
+```
 
 ### Array
 
@@ -81,12 +87,12 @@ Sequential Assignment 462.22M (  2.16ns) (±16.84%)       fastest
 #### String Concatenation [code](code/string/concatenation.cr)
 
 ```
-RUN crystal build --release code/string/concatenation.cr -o bin/string/concatenation_test
-RUN ./bin/string/concatenation_test with Crystal 0.22.0 (2017-04-20) LLVM 4.0.0
+RUN crystal build --release code/string/concatenation.cr -o bin/string/concatenation_benchmark
+RUN ./bin/string/concatenation_benchmark with Crystal 0.22.0 (2017-04-20) LLVM 4.0.0
 
-String#+  17.59M ( 56.84ns) (± 2.05%)       fastest
-String#"   5.24M (190.89ns) (± 1.76%)  3.36× slower
-String#%    3.3M (303.11ns) (± 1.10%)  5.33× slower
+String#+  23.35M ( 42.82ns) (± 3.19%)       fastest
+String#"   5.21M ( 192.0ns) (± 2.57%)  4.48× slower
+String#%   3.29M (304.04ns) (± 1.97%)  7.10× slower
 ```
 
 ### Range

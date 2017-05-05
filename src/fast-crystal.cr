@@ -14,7 +14,7 @@ Dir.glob("code/**/*.cr").each do |file|
   test_section = file.sub(test_file, "").sub("code/", "")
 
   bin_section = File.join(BIN_PATH, test_section)
-  bin_file = File.join(bin_section, File.basename(test_file, File.extname(test_file)) + "_test")
+  bin_file = File.join(bin_section, File.basename(test_file, File.extname(test_file)) + "_benchmark")
 
   FileUtils.mkdir_p(bin_section)
 
