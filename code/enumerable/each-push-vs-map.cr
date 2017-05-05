@@ -2,7 +2,7 @@ require "benchmark"
 
 ARRAY = (1..1000).to_a
 
-def fasttest
+def fastest
   ARRAY.map { |i| i }
 end
 
@@ -17,7 +17,7 @@ def slow
 end
 
 Benchmark.ips do |x|
-  x.report("Array#map")         { fasttest }
+  x.report("Array#map")         { fastest }
   x.report("Array#each + push") { fast }
   x.report("Array#each_with_object")  { slow }
 end

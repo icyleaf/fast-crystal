@@ -15,12 +15,12 @@ def fast
   SampleStruct.new("Crystal", 2011)
 end
 
-def fasttest
+def fastest
   {name: "Crystal", year: 2011}
 end
 
 Benchmark.ips do |x|
-  x.report("NamedTuple")  { fasttest }
+  x.report("NamedTuple")  { fastest }
   x.report("Struct")      { fast }
   x.report("Hash")        { slow }
 end
