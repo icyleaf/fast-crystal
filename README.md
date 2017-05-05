@@ -4,12 +4,13 @@ It's Crystal version based on [ruby version](https://github.com/JuanitoFatas/fas
 
 Each idiom has a corresponding code example that resides in [code](code).
 
+You will found the result of benchmarks is very amazing:exclamation: It is all fast or very close to the number most of them.
 
 All results listed in README.md are running with Crystal 0.22.0 (2017-04-20) LLVM 4.0.0 on OS X 10.12.4 in release mode.
 Machine information: MacBook Pro (Retina, 15-inch, Mid 2015), 2.2 GHz Intel Core i7, 16 GB 1600 MHz DDR3.
 Your results may vary, but you get the idea. : )
 
-**Let's write faster code, together! <3**
+**Let's write faster code, together! :trollface:**
 
 ## Measurement Tool
 
