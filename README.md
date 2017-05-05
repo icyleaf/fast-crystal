@@ -72,7 +72,7 @@ RUN ./bin/general/positional_argument_vs_named_argument_benchmark with Crystal 0
 Positional arguments 455.11M (   2.2ns) (±17.72%)  1.04× slower
 ```
 
-#### `loop vs `while` true [code](code/general/loop_vs_while_true.cr)
+#### `loop` vs `while` true [code](code/general/loop_vs_while_true.cr)
 
 ```
 RUN crystal build --release code/general/loop_vs_while_true.cr -o bin/general/loop_vs_while_true_benchmark
