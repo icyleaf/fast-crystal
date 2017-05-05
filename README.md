@@ -19,7 +19,7 @@ Use [benchmark](https://crystal-lang.org/api/0.22.0/Benchmark.html).
 ## Run the Benchmarks
 
 ```
-$ crystal src/fast-crystal.cr
+$ make
 ```
 
 ### Template
