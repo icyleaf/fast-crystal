@@ -52,6 +52,20 @@ end
 
 ### General
 
+##### Parallel Assignment vs Sequential Assignment [code](code/general/assignment.cr)
+
+```
+RUN crystal build --release code/general/assignment.cr -o bin/general/assignment_test
+RUN ./bin/general/assignment_test with Crystal 0.22.0 (2017-04-20) LLVM 4.0.0
+
+Sequential Assignment 462.22M (  2.16ns) (±16.84%)       fastest
+  Parallel Assignment  445.6M (  2.24ns) (±15.79%)  1.04× slower
+```
+
+##### `begin...rescue` vs `respond_to?` for Control Flow [code](code/general/begin-rescue-vs-respond-to.cr)
+
+
+
 ### Array
 
 ### General

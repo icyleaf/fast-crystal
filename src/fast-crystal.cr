@@ -28,9 +28,13 @@ Dir.glob("code/**/*.cr").each do |file|
   ]
   puts "RUN " + complie_command.join(" ")
   complie_output = `#{complie_command.join(" ")}`
-  puts complie_output unless complie_output.empty?
+  unless complie_output.empty?
+    puts complie_output
+    exit
+  end
 
   puts "RUN ./#{bin_file} with #{CRYSTAL_VERSION}"
   puts
   puts `./#{bin_file}`
+  puts
 end
