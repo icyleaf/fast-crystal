@@ -1,4 +1,3 @@
-require "./fast-crystal/*"
 require "file_utils"
 
 BIN_PATH = "bin"
@@ -19,21 +18,23 @@ Dir.glob("code/**/*.cr").each do |file|
 
   FileUtils.mkdir_p(bin_section)
 
-  complie_command = [ "crystal", "build", "--release", file, "-o", bin_file ]
-
+  next if test_section != "proc-and-block"
   if section.empty? || section != test_section
     section = test_section
-    puts "### " + section.capitalize
+    puts "### " + section == "proc-and-block" ? "Proce & Block" : section.capitalize
     puts
   end
 
+  complie_command = [ "crystal", "build", "--release", file, "-o", bin_file ]
   print_title(file)
   puts
   puts "```"
-  puts "RUN " + complie_command.join(" ")
+  puts "$ " + complie_command.join(" ")
   `#{complie_command.join(" ")}`
 
-  puts "RUN ./#{bin_file} with #{CRYSTAL_VERSION}"
+  puts "$ ./" + bin_file
+  puts
+  puts CRYSTAL_VERSION
   puts
   puts `./#{bin_file}`
   puts "```"
