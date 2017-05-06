@@ -8,20 +8,22 @@ if Dir.exists?(BIN_PATH)
   FileUtils.rm_rf(BIN_PATH)
 end
 
+# target = ARGV[0]
 section = ""
 Dir.glob("code/**/*.cr").each do |file|
   test_file = File.basename(file)
   test_section = file.sub(test_file, "").sub("code/", "")[0..-2]
 
-  bin_section = File.join(BIN_PATH, test_section)
+  # next if !target.empty? && test_section != target
+
+  bin_section = File.git dijoin(BIN_PATH, test_section)
   bin_file = File.join(bin_section, File.basename(test_file, File.extname(test_file)))
 
   FileUtils.mkdir_p(bin_section)
 
-  next if test_section != "proc-and-block"
   if section.empty? || section != test_section
     section = test_section
-    puts "### " + section == "proc-and-block" ? "Proce & Block" : section.capitalize
+    puts "### " + (section == "proc-and-block" ? "Proce & Block" : section.capitalize)
     puts
   end
 
@@ -49,7 +51,7 @@ def print_title(file)
   title = if title.includes?("-vs-")
     title_sections = [] of String
     title.split("-vs-").each do |str|
-    title_sections << "`" + str.sub("-", " ") + "`"
+    title_sections << "`" + (str.includes?("[-1]") ? str : str.sub("-", " ")) + "`"
     end
 
     title_sections.join(" vs ")

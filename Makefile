@@ -8,5 +8,5 @@ clean:
 	rm -rf bin
 	mkdir bin
 
-build: clean
+build:
 	$(CRYSTAL_BIN) build --release -o bin/fast-crystal src/fast-crystal.cr $(CRFLAGS)
