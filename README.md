@@ -360,7 +360,7 @@ $ ./bin/string/concatenation
 Crystal 0.22.0 (2017-04-20) LLVM 4.0.0
 
 String#+   17.4M ( 57.49ns) (± 3.83%)       fastest
-String#"    5.2M (192.28ns) (± 1.45%)  3.34× slower
+String#{}   5.2M (192.28ns) (± 1.45%)  3.34× slower
 String#%    3.3M (302.85ns) (± 1.18%)  5.27× slower
 ```
 
