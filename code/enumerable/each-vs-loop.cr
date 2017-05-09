@@ -1,11 +1,13 @@
 require "benchmark"
 
-ARRAY = (1..100)
+ARRAY = (1..100).to_a
 
 def fast
-  {% for number in ARRAY %}
-    {{number.id}}
-  {% end %}
+  i = 0
+  while i < ARRAY.size
+    ARRAY[i]
+    i += 1
+  end
 end
 
 def slow
@@ -15,6 +17,6 @@ def slow
 end
 
 Benchmark.ips do |x|
-  x.report("For loop") { fast }
+  x.report("While Loop") { fast }
   x.report("#each") { slow }
 end
