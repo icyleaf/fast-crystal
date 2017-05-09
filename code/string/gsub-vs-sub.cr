@@ -11,6 +11,6 @@ def fast
 end
 
 Benchmark.ips do |x|
-  x.report("String#sub")  { fast }
+  x.report("String#sub") { fast }
   x.report("String#gsub") { slow }
 end

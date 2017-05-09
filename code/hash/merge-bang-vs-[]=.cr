@@ -4,7 +4,7 @@ ENUM = (1..100)
 
 def slow
   ENUM.each_with_object({} of Int32 => Int32) do |e, h|
-    h.merge!({ e => e })
+    h.merge!({e => e})
   end
 end
 

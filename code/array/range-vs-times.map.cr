@@ -6,6 +6,6 @@ Benchmark.ips do |x|
   end
 
   x.report("Times#to_a") do
-    100.times.map{|i| i+1 }.to_a
+    100.times.map { |i| i + 1 }.to_a
   end
 end

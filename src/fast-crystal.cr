@@ -1,7 +1,7 @@
 require "file_utils"
 
-BIN_PATH = "bin"
-SOURCE_PATH = File.expand_path("code")
+BIN_PATH        = "bin"
+SOURCE_PATH     = File.expand_path("code")
 CRYSTAL_VERSION = `crystal -v`
 
 if Dir.exists?(BIN_PATH)
@@ -27,7 +27,7 @@ Dir.glob("code/**/*.cr").each do |file|
     puts
   end
 
-  complie_command = [ "crystal", "build", "--release", file, "-o", bin_file ]
+  complie_command = ["crystal", "build", "--release", file, "-o", bin_file]
   print_title(file)
   puts
   puts "```"
@@ -49,15 +49,15 @@ def print_title(file)
 
   title = filename.sub(File.extname(filename), "")
   title = if title.includes?("-vs-")
-    title_sections = [] of String
-    title.split("-vs-").each do |str|
-    title_sections << "`" + (str.includes?("[-1]") ? str : str.sub("-", " ")) + "`"
-    end
+            title_sections = [] of String
+            title.split("-vs-").each do |str|
+              title_sections << "`" + (str.includes?("[-1]") ? str : str.sub("-", " ")) + "`"
+            end
 
-    title_sections.join(" vs ")
-  else
-    title.capitalize
-  end
+            title_sections.join(" vs ")
+          else
+            title.capitalize
+          end
 
   puts "#### " + title + " [code](" + file_path + ")"
 end

@@ -12,5 +12,5 @@ end
 
 Benchmark.ips do |x|
   x.report("String#chomp\"string\"") { fast }
-  x.report("String#sub/regexp/")   { slow }
+  x.report("String#sub/regexp/") { slow }
 end

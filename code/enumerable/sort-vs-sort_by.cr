@@ -26,5 +26,5 @@ end
 Benchmark.ips do |x|
   x.report("Enumerable#sort_by (Symbol#to_proc)") { fastest }
   x.report("Enumerable#sort_by") { faster }
-  x.report("Enumerable#sort")    { slow }
+  x.report("Enumerable#sort") { slow }
 end

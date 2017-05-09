@@ -3,11 +3,11 @@ require "benchmark"
 ARRAY = (1..100).to_a
 
 def slow
-  ARRAY.reverse.each{|x| x}
+  ARRAY.reverse.each { |x| x }
 end
 
 def fast
-  ARRAY.reverse_each{|x| x}
+  ARRAY.reverse_each { |x| x }
 end
 
 Benchmark.ips do |x|

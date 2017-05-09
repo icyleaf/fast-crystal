@@ -17,7 +17,7 @@ def slow
 end
 
 Benchmark.ips do |x|
-  x.report("Array#map")         { fastest }
+  x.report("Array#map") { fastest }
   x.report("Array#each + push") { fast }
-  x.report("Array#each_with_object")  { slow }
+  x.report("Array#each_with_object") { slow }
 end

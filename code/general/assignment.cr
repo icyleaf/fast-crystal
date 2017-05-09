@@ -19,5 +19,5 @@ end
 
 Benchmark.ips do |x|
   x.report("Sequential Assignment") { slow }
-  x.report("Parallel Assignment")   { fast }
+  x.report("Parallel Assignment") { fast }
 end
