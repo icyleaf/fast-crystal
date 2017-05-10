@@ -1,6 +1,6 @@
 require "benchmark"
 
-NAMEDTUPLE = { fast: "ruby" }
+NAMEDTUPLE = {fast: "ruby"}
 
 def fast
   NAMEDTUPLE[:fast]
@@ -11,6 +11,6 @@ def slow
 end
 
 Benchmark.ips do |x|
-  x.report("NamedTuple#[]")    { fast }
-  x.report("NamedTuple#fetch") { slow  }
+  x.report("NamedTuple#[]") { fast }
+  x.report("NamedTuple#fetch") { slow }
 end

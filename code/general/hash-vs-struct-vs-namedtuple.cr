@@ -8,7 +8,7 @@ struct SampleStruct
 end
 
 def slow
-  { "name" => "Crystal", "year" => 2011 }
+  {"name" => "Crystal", "year" => 2011}
 end
 
 def fast
@@ -20,7 +20,7 @@ def fastest
 end
 
 Benchmark.ips do |x|
-  x.report("NamedTuple")  { fastest }
-  x.report("Struct")      { fast }
-  x.report("Hash")        { slow }
+  x.report("NamedTuple") { fastest }
+  x.report("Struct") { fast }
+  x.report("Hash") { slow }
 end

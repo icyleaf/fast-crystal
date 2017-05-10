@@ -11,6 +11,6 @@ def fast
 end
 
 Benchmark.ips do |x|
-  x.report("Block")          { slow }
+  x.report("Block") { slow }
   x.report("Symbol#to_proc") { fast }
 end

@@ -1,6 +1,6 @@
 require "benchmark"
 
-HASH = ("a".."z").map{ |v| { v => v.bytes } }
+HASH = ("a".."z").map { |v| {v => v.bytes} }
 
 def fast
   HASH.dup
@@ -12,5 +12,5 @@ end
 
 Benchmark.ips do |x|
   x.report("Hash#dup") { fast }
-  x.report("Hash#clone")   { slow }
+  x.report("Hash#clone") { slow }
 end

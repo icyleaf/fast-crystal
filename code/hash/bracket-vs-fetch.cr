@@ -1,7 +1,7 @@
 require "benchmark"
 
-HASH = { "fast" => "ruby" }
-NAMEDTUPLE = { fast: "ruby" }
+HASH       = {"fast" => "ruby"}
+NAMEDTUPLE = {fast: "ruby"}
 
 def fastest
   NAMEDTUPLE[:fast]
@@ -20,8 +20,8 @@ def slow
 end
 
 Benchmark.ips do |x|
-  x.report("NamedTuple#[]")    { fastest }
-  x.report("NamedTuple#fetch") { faster  }
-  x.report("Hash#[]")    { fast    }
-  x.report("Hash#fetch") { slow    }
+  x.report("NamedTuple#[]") { fastest }
+  x.report("NamedTuple#fetch") { faster }
+  x.report("Hash#[]") { fast }
+  x.report("Hash#fetch") { slow }
 end

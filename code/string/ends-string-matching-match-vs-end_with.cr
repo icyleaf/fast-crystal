@@ -12,5 +12,5 @@ end
 
 Benchmark.ips do |x|
   x.report("String#end_with?") { fast }
-  x.report("String#=~")        { slow }
+  x.report("String#=~") { slow }
 end
