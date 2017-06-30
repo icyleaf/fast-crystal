@@ -365,7 +365,7 @@ String#{}   9.51M (105.16ns) (± 6.12%)  3.47× slower
  String#%    5.0M (200.03ns) (± 4.81%)  6.60× slower
 ```
 
-#### `ends string-matching-match` vs `end_with` [code](code/string/ends-string-matching-match-vs-end_with.cr)
+#### `ends-string-matching-match` vs `end_with` [code](code/string/ends-string-matching-match-vs-end_with.cr)
 
 ```
 $ crystal build --release code/string/ends-string-matching-match-vs-end_with.cr -o bin/string/ends-string-matching-match-vs-end_with
@@ -375,6 +375,18 @@ Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
 
 String#end_with? 376.84M (  2.65ns) (± 4.02%)       fastest
        String#=~   6.08M (164.37ns) (± 2.65%) 61.94× slower
+```
+
+#### `equal substring of char` [code](code/string/equal-substring-of-char.cr)
+
+```
+$ crystal build --release code/string/equal-substring-of-char.cr -o bin/string/equal-substring-of-char
+$ ./bin/string/equal-substring-of-char
+
+Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
+         "==="[0] == '=' 252.73M (  3.96ns) (±12.75%)       fastest
+    "==="[0].to_s == "="  19.65M ( 50.88ns) (± 2.72%) 12.86× slower
+"==="[0] == "=".chars[0]  16.97M ( 58.91ns) (± 3.48%) 14.89× slower
 ```
 
 #### `equal` vs `match` [code](code/string/equal-vs-match.cr)
