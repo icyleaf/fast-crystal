@@ -1,5 +1,5 @@
 name: fast-crystal
-version: 0.1.0
+version: 0.2.0
 
 authors:
   - icyleaf <icyleaf.cn@gmail.com>
@@ -8,6 +8,6 @@ targets:
   fast-crystal:
     main: src/fast-crystal.cr
 
-crystal: 0.22.0
+crystal: 0.24.2
 
 license: MIT
