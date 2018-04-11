@@ -61,8 +61,6 @@ end
 $ crystal build --release code/array/insert-vs-unshift.cr -o bin/array/insert-vs-unshift
 $ ./bin/array/insert-vs-unshift
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
  Array#insert   1.55  (646.14ms) (± 1.21%)  1.00× slower
 Array#unshift   1.55  (645.84ms) (± 1.46%)       fastest
 ```
@@ -72,8 +70,6 @@ Array#unshift   1.55  (645.84ms) (± 1.46%)       fastest
 ```
 $ crystal build --release code/array/last-vs-index[-1].cr -o bin/array/last-vs-index[-1]
 $ ./bin/array/last-vs-index[-1]
-
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
 
 Array#[-1] 377.86M (  2.65ns) (± 3.80%)       fastest
 Array#last 377.83M (  2.65ns) (± 2.86%)  1.00× slower
@@ -85,8 +81,6 @@ Array#last 377.83M (  2.65ns) (± 2.86%)  1.00× slower
 $ crystal build --release code/array/first-vs-index[0].cr -o bin/array/first-vs-index[0]
 $ ./bin/array/first-vs-index[0]
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
 Array#first 378.15M (  2.64ns) (± 2.88%)       fastest
   Array#[0] 377.87M (  2.65ns) (± 3.03%)  1.00× slower
 ```
@@ -96,8 +90,6 @@ Array#first 378.15M (  2.64ns) (± 2.88%)       fastest
 ```
 $ crystal build --release code/array/range-vs-times.map.cr -o bin/array/range-vs-times.map
 $ ./bin/array/range-vs-times.map
-
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
 
 Range#to_a   1.54M ( 647.9ns) (± 2.16%)       fastest
 Times#to_a   1.46M (683.39ns) (± 7.64%)  1.05× slower
@@ -111,8 +103,6 @@ Times#to_a   1.46M (683.39ns) (± 7.64%)  1.05× slower
 $ crystal build --release code/enumerable/each-push-vs-map.cr -o bin/enumerable/each-push-vs-map
 $ ./bin/enumerable/each-push-vs-map
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
              Array#map 504.43k (  1.98µs) (± 3.05%)       fastest
      Array#each + push 245.71k (  4.07µs) (± 5.12%)  2.05× slower
 Array#each_with_object 244.42k (  4.09µs) (± 3.29%)  2.06× slower
@@ -124,8 +114,6 @@ Array#each_with_object 244.42k (  4.09µs) (± 3.29%)  2.06× slower
 $ crystal build --release code/enumerable/each-vs-loop.cr -o bin/enumerable/each-vs-loop
 $ ./bin/enumerable/each-vs-loop
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
 While Loop   6.66M (150.05ns) (± 0.36%) 70.96× slower
      #each 472.92M (  2.11ns) (± 3.39%)       fastest
 ```
@@ -136,8 +124,6 @@ While Loop   6.66M (150.05ns) (± 0.36%) 70.96× slower
 $ crystal build --release code/enumerable/each_with_index-vs-while-loop.cr -o bin/enumerable/each_with_index-vs-while-loop
 $ ./bin/enumerable/each_with_index-vs-while-loop
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
      While Loop   8.11M (123.27ns) (± 3.99%) 58.27× slower
 each_with_index 472.68M (  2.12ns) (± 4.05%)       fastest
 ```
@@ -147,8 +133,6 @@ each_with_index 472.68M (  2.12ns) (± 4.05%)       fastest
 ```
 $ crystal build --release code/enumerable/map-flatten-vs-flat_map.cr -o bin/enumerable/map-flatten-vs-flat_map
 $ ./bin/enumerable/map-flatten-vs-flat_map
-
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
 
    Array#flat_map (Tuple)   1.05M (948.81ns) (± 2.42%)       fastest
 Array#map.flatten (Tuple) 694.26k (  1.44µs) (± 4.33%)  1.52× slower
@@ -162,8 +146,6 @@ Array#map.flatten (Array)  186.1k (  5.37µs) (± 5.24%)  5.66× slower
 $ crystal build --release code/enumerable/reverse.each-vs-reverse_each.cr -o bin/enumerable/reverse.each-vs-reverse_each
 $ ./bin/enumerable/reverse.each-vs-reverse_each
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
 Array#reverse.each   3.87M (258.42ns) (± 3.92%) 121.62× slower
 Array#reverse_each 470.62M (  2.12ns) (± 4.66%)        fastest
 ```
@@ -173,8 +155,6 @@ Array#reverse_each 470.62M (  2.12ns) (± 4.66%)        fastest
 ```
 $ crystal build --release code/enumerable/sort-vs-sort_by.cr -o bin/enumerable/sort-vs-sort_by
 $ ./bin/enumerable/sort-vs-sort_by
-
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
 
    Enumerable#sort 154.12k (  6.49µs) (± 1.24%)  1.14× slower
 Enumerable#sort_by 175.13k (  5.71µs) (± 0.50%)       fastest
@@ -188,8 +168,6 @@ Enumerable#sort_by 175.13k (  5.71µs) (± 0.50%)       fastest
 $ crystal build --release code/general/assignment.cr -o bin/general/assignment
 $ ./bin/general/assignment
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
 Sequential Assignment 471.82M (  2.12ns) (± 3.91%)  1.00× slower
   Parallel Assignment 472.29M (  2.12ns) (± 3.58%)       fastest
 ```
@@ -199,8 +177,6 @@ Sequential Assignment 471.82M (  2.12ns) (± 3.91%)  1.00× slower
 ```
 $ crystal build --release code/general/hash-vs-struct-vs-namedtuple.cr -o bin/general/hash-vs-struct-vs-namedtuple
 $ ./bin/general/hash-vs-struct-vs-namedtuple
-
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
 
 NamedTuple 471.56M (  2.12ns) (± 3.98%)  1.00× slower
     Struct 472.26M (  2.12ns) (± 3.58%)       fastest
@@ -213,8 +189,6 @@ NamedTuple 471.56M (  2.12ns) (± 3.98%)  1.00× slower
 $ crystal build --release code/general/loop-vs-while_true.cr -o bin/general/loop-vs-while_true
 $ ./bin/general/loop-vs-while_true
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
  While Loop  19.01  ( 52.62ms) (± 0.67%)  1.00× slower
 Kernel Loop  19.03  ( 52.54ms) (± 0.40%)       fastest
 ```
@@ -225,8 +199,6 @@ Kernel Loop  19.03  ( 52.54ms) (± 0.40%)       fastest
 $ crystal build --release code/general/positional_argument-vs-named_argument.cr -o bin/general/positional_argument-vs-named_argument
 $ ./bin/general/positional_argument-vs-named_argument
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
      Named arguments 475.11M (   2.1ns) (± 1.52%)       fastest
 Positional arguments 474.94M (  2.11ns) (± 1.61%)  1.00× slower
 ```
@@ -236,8 +208,6 @@ Positional arguments 474.94M (  2.11ns) (± 1.61%)  1.00× slower
 ```
 $ crystal build --release code/general/property-vs-getter_and_setter.cr -o bin/general/property-vs-getter_and_setter
 $ ./bin/general/property-vs-getter_and_setter
-
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
 
          property  43.53M ( 22.97ns) (± 8.82%)  1.18× slower
 getter_and_setter   51.4M ( 19.46ns) (± 3.78%)       fastest
@@ -251,8 +221,6 @@ getter_and_setter   51.4M ( 19.46ns) (± 3.78%)       fastest
 $ crystal build --release code/hash/bracket-vs-fetch.cr -o bin/hash/bracket-vs-fetch
 $ ./bin/hash/bracket-vs-fetch
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
    NamedTuple#[]  377.1M (  2.65ns) (± 5.19%)  1.01× slower
 NamedTuple#fetch 380.46M (  2.63ns) (± 2.09%)       fastest
          Hash#[] 189.26M (  5.28ns) (± 2.88%)  2.01× slower
@@ -265,8 +233,6 @@ NamedTuple#fetch 380.46M (  2.63ns) (± 2.09%)       fastest
 $ crystal build --release code/hash/clone-vs-dup.cr -o bin/hash/clone-vs-dup
 $ ./bin/hash/clone-vs-dup
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
   Hash#dup   6.06M (164.89ns) (±10.42%)       fastest
 Hash#clone 217.41k (   4.6µs) (± 4.79%) 27.90× slower
 ```
@@ -277,8 +243,6 @@ Hash#clone 217.41k (   4.6µs) (± 4.79%) 27.90× slower
 $ crystal build --release code/hash/keys-each-vs-each_key.cr -o bin/hash/keys-each-vs-each_key
 $ ./bin/hash/keys-each-vs-each_key
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
 Hash#keys.each   3.63M (275.47ns) (± 3.90%)  1.24× slower
  Hash#each_key   4.51M ( 221.5ns) (± 0.99%)       fastest
 ```
@@ -288,8 +252,6 @@ Hash#keys.each   3.63M (275.47ns) (± 3.90%)  1.24× slower
 ```
 $ crystal build --release code/hash/merge-bang-vs-[]=.cr -o bin/hash/merge-bang-vs-[]=
 $ ./bin/hash/merge-bang-vs-[]=
-
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
 
 Hash#merge!   66.8k ( 14.97µs) (± 4.96%)  3.42× slower
    Hash#[]= 228.18k (  4.38µs) (± 1.98%)       fastest
@@ -303,8 +265,6 @@ Hash#merge!   66.8k ( 14.97µs) (± 4.96%)  3.42× slower
 $ crystal build --release code/namedtuple/bracket-vs-fetch.cr -o bin/namedtuple/bracket-vs-fetch
 $ ./bin/namedtuple/bracket-vs-fetch
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
    NamedTuple#[] 378.21M (  2.64ns) (± 2.97%)  1.00× slower
 NamedTuple#fetch 378.41M (  2.64ns) (± 2.72%)       fastest
 ```
@@ -314,8 +274,6 @@ NamedTuple#fetch 378.41M (  2.64ns) (± 2.72%)       fastest
 ```
 $ crystal build --release code/namedtuple/fetch-vs-fetch_with_block.cr -o bin/namedtuple/fetch-vs-fetch_with_block
 $ ./bin/namedtuple/fetch-vs-fetch_with_block
-
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
 
 NamedTuple#fetch + const 290.74M (  3.44ns) (± 3.31%)  1.30× slower
 NamedTuple#fetch + block 377.67M (  2.65ns) (± 3.65%)  1.00× slower
@@ -330,8 +288,6 @@ NamedTuple#fetch + block 377.67M (  2.65ns) (± 3.65%)  1.00× slower
 $ crystal build --release code/proc-and-block/block-vs-to_proc.cr -o bin/proc-and-block/block-vs-to_proc
 $ ./bin/proc-and-block/block-vs-to_proc
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
          Block 278.15k (   3.6µs) (± 3.79%)  1.00× slower
 Symbol#to_proc  278.4k (  3.59µs) (± 4.91%)       fastest
 ```
@@ -341,8 +297,6 @@ Symbol#to_proc  278.4k (  3.59µs) (± 4.91%)       fastest
 ```
 $ crystal build --release code/proc-and-block/proc-call-vs-yield.cr -o bin/proc-and-block/proc-call-vs-yield
 $ ./bin/proc-and-block/proc-call-vs-yield
-
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
 
     block.call 473.29M (  2.11ns) (± 3.11%)  1.00× slower
  block + yield 473.36M (  2.11ns) (± 3.10%)  1.00× slower
@@ -358,8 +312,6 @@ block argument 473.48M (  2.11ns) (± 3.10%)       fastest
 $ crystal build --release code/string/concatenation.cr -o bin/string/concatenation
 $ ./bin/string/concatenation
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
  String#+  32.98M ( 30.32ns) (±11.62%)       fastest
 String#{}   9.51M (105.16ns) (± 6.12%)  3.47× slower
  String#%    5.0M (200.03ns) (± 4.81%)  6.60× slower
@@ -371,8 +323,6 @@ String#{}   9.51M (105.16ns) (± 6.12%)  3.47× slower
 $ crystal build --release code/string/ends-string-matching-match-vs-end_with.cr -o bin/string/ends-string-matching-match-vs-end_with
 $ ./bin/string/ends-string-matching-match-vs-end_with
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
 String#end_with? 376.84M (  2.65ns) (± 4.02%)       fastest
        String#=~   6.08M (164.37ns) (± 2.65%) 61.94× slower
 ```
@@ -383,7 +333,6 @@ String#end_with? 376.84M (  2.65ns) (± 4.02%)       fastest
 $ crystal build --release code/string/equal-substring-of-char.cr -o bin/string/equal-substring-of-char
 $ ./bin/string/equal-substring-of-char
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
          "==="[0] == '=' 252.73M (  3.96ns) (±12.75%)       fastest
     "==="[0].to_s == "="  19.65M ( 50.88ns) (± 2.72%) 12.86× slower
 "==="[0] == "=".chars[0]  16.97M ( 58.91ns) (± 3.48%) 14.89× slower
@@ -394,8 +343,6 @@ Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
 ```
 $ crystal build --release code/string/equal-vs-match.cr -o bin/string/equal-vs-match
 $ ./bin/string/equal-vs-match
-
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
 
 String#match  14.97M (  66.8ns) (± 1.47%)  1.02× slower
   Regexp#===  15.12M ( 66.12ns) (± 3.51%)  1.01× slower
@@ -408,10 +355,28 @@ String#match  14.97M (  66.8ns) (± 1.47%)  1.02× slower
 $ crystal build --release code/string/gsub-vs-sub.cr -o bin/string/gsub-vs-sub
 $ ./bin/string/gsub-vs-sub
 
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
-
  String#sub   3.68M ( 271.6ns) (± 3.01%)       fastest
 String#gsub 644.56k (  1.55µs) (± 1.10%)  5.71× slower
+```
+
+#### `includes?` vs `to_s.includes?` [code](includes-vs-to_s.includes.cr)
+
+```
+$ crystal build --release code/string/includes-vs-to_s.includes.cr -o bin/string/includes-vs-to_s.includes
+$ ./bin/string/includes-vs-to_s.includes
+
+  String#includes? 454.06M (   2.2ns) (±14.78%)       fastest
+Nil#to_s#includes? 440.26M (  2.27ns) (±15.14%)  1.03× slower
+```
+
+#### `nil?` vs `to_s.empty?` [code](code/string/nil-vs-to_s.empty.cr)
+
+```
+$ crystal build --release code/string/nil-vs-to_s.empty.cr -o bin/string/nil-vs-to_s.empty
+$ ./bin/string/includes-vs-to_s.includes
+
+       String#nil? 480.29M (  2.08ns) (± 8.87%)       fastest
+String#to_s#empty? 467.21M (  2.14ns) (±11.46%)  1.03× slower
 ```
 
 #### `sub` vs `chomp` [code](code/string/sub-vs-chomp.cr)
@@ -419,8 +384,6 @@ String#gsub 644.56k (  1.55µs) (± 1.10%)  5.71× slower
 ```
 $ crystal build --release code/string/sub-vs-chomp.cr -o bin/string/sub-vs-chomp
 $ ./bin/string/sub-vs-chomp
-
-Crystal 0.22.0 (2017-04-22) LLVM 4.0.0
 
 String#chomp"string"  37.67M ( 26.55ns) (± 8.27%)       fastest
   String#sub/regexp/   3.51M ( 284.9ns) (± 5.46%) 10.73× slower
