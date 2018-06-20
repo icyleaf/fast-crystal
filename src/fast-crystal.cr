@@ -9,7 +9,7 @@ if Dir.exists?(BIN_PATH)
 end
 
 puts
-puts "> Test in #{CRYSTAL_VERSION}"
+puts "> Test in #{CRYSTAL_VERSION.split("\n").join(" ")}"
 puts
 
 section = ""

@@ -4,7 +4,7 @@ It's Crystal version based on [ruby version](https://github.com/JuanitoFatas/fas
 
 Each idiom has a corresponding code example that resides in [code](code).
 
-All results listed in README.md are running with Crystal 0.22.0 (2017-04-20) LLVM 4.0.0 on OS X 10.12.4.
+All results listed in README.md are running with Crystal 0.25.0 (2018-06-15) LLVM 5.0.1 on OS X 10.13.5.
 
 Machine information: MacBook Pro (Retina, 15-inch, Mid 2015), 2.2 GHz Intel Core i7, 16 GB 1600 MHz DDR3.
 
@@ -12,11 +12,11 @@ Your results may vary, but you get the idea. : )
 
 > Doubt the results? please discuss in [Crystal Issue#4383](https://github.com/crystal-lang/crystal/issues/4383).
 
-**Let's write faster code, together!  :trollface:**
+**Let's write faster code, together! :trollface:**
 
 ## Measurement Tool
 
-Use [benchmark](https://crystal-lang.org/api/0.22.0/Benchmark.html).
+Use Crystal's built-in [benchmark](https://crystal-lang.org/api/0.22.0/Benchmark.html).
 
 ## Run the Benchmarks
 
@@ -45,54 +45,56 @@ end
 
 ### Index
 
-- [General](#general)
 - [Array](#array)
 - [Enumerable](#enumerable)
+- [General](#general)
 - [Hash](#hash)
 - [NamedTuple](#namedtuple)
 - [Proc & Block](#proc--block)
 - [String](#string)
 
+> Test in Crystal 0.25.0 (2018-06-15)  LLVM: 5.0.1 Default target: x86_64-apple-macosx
+
 ### Array
+
+#### `first` vs `index[0]` [code](code/array/first-vs-index[0].cr)
+
+```
+$ crystal build --release --no-debug -o bin/array/first-vs-index[0] code/array/first-vs-index[0].cr
+$ ./bin/array/first-vs-index[0]
+
+Array#first 368.47M (  2.71ns) (±10.26%)  0 B/op   1.04× slower
+  Array#[0] 383.65M (  2.61ns) (± 5.54%)  0 B/op        fastest
+```
 
 #### `insert` vs `unshift` [code](code/array/insert-vs-unshift.cr)
 
 ```
-$ crystal build --release code/array/insert-vs-unshift.cr -o bin/array/insert-vs-unshift
+$ crystal build --release --no-debug -o bin/array/insert-vs-unshift code/array/insert-vs-unshift.cr
 $ ./bin/array/insert-vs-unshift
 
- Array#insert   1.55  (646.14ms) (± 1.21%)  1.00× slower
-Array#unshift   1.55  (645.84ms) (± 1.46%)       fastest
+ Array#insert   1.33  ( 752.4ms) (± 1.19%)  1573696 B/op   1.00× slower
+Array#unshift   1.33  ( 750.3ms) (± 0.34%)  1574201 B/op        fastest
 ```
 
 #### `last` vs `index[-1]` [code](code/array/last-vs-index[-1].cr)
 
 ```
-$ crystal build --release code/array/last-vs-index[-1].cr -o bin/array/last-vs-index[-1]
+$ crystal build --release --no-debug -o bin/array/last-vs-index[-1] code/array/last-vs-index[-1].cr
 $ ./bin/array/last-vs-index[-1]
 
-Array#[-1] 377.86M (  2.65ns) (± 3.80%)       fastest
-Array#last 377.83M (  2.65ns) (± 2.86%)  1.00× slower
-```
-
-#### `first` vs `index[0]` [code](code/array/first-vs-index[0].cr)
-
-```
-$ crystal build --release code/array/first-vs-index[0].cr -o bin/array/first-vs-index[0]
-$ ./bin/array/first-vs-index[0]
-
-Array#first 378.15M (  2.64ns) (± 2.88%)       fastest
-  Array#[0] 377.87M (  2.65ns) (± 3.03%)  1.00× slower
+Array#[-1]  355.5M (  2.81ns) (±13.59%)  0 B/op   1.03× slower
+Array#last 365.22M (  2.74ns) (± 8.70%)  0 B/op        fastest
 ```
 
 #### `range` vs `times.map` [code](code/array/range-vs-times.map.cr)
 
 ```
-$ crystal build --release code/array/range-vs-times.map.cr -o bin/array/range-vs-times.map
+$ crystal build --release --no-debug -o bin/array/range-vs-times.map code/array/range-vs-times.map.cr
 $ ./bin/array/range-vs-times.map
 
-Range#to_a   1.54M ( 647.9ns) (± 2.16%)       fastest
-Times#to_a   1.46M (683.39ns) (± 7.64%)  1.05× slower
+Range#to_a 589.87k (   1.7µs) (± 4.76%)  1712 B/op        fastest
+Times#to_a 568.61k (  1.76µs) (± 9.24%)  1728 B/op   1.04× slower
 ```
 
 ### Enumerable
@@ -100,64 +102,64 @@ Times#to_a   1.46M (683.39ns) (± 7.64%)  1.05× slower
 #### `each push` vs `map` [code](code/enumerable/each-push-vs-map.cr)
 
 ```
-$ crystal build --release code/enumerable/each-push-vs-map.cr -o bin/enumerable/each-push-vs-map
+$ crystal build --release --no-debug -o bin/enumerable/each-push-vs-map code/enumerable/each-push-vs-map.cr
 $ ./bin/enumerable/each-push-vs-map
 
-             Array#map 504.43k (  1.98µs) (± 3.05%)       fastest
-     Array#each + push 245.71k (  4.07µs) (± 5.12%)  2.05× slower
-Array#each_with_object 244.42k (  4.09µs) (± 3.29%)  2.06× slower
+             Array#map 140.99k (  7.09µs) (±10.03%)   4048 B/op        fastest
+     Array#each + push  87.84k ( 11.38µs) (± 7.25%)  13008 B/op   1.61× slower
+Array#each_with_object  86.59k ( 11.55µs) (± 3.14%)  13008 B/op   1.63× slower
 ```
 
 #### `each` vs `loop` [code](code/enumerable/each-vs-loop.cr)
 
 ```
-$ crystal build --release code/enumerable/each-vs-loop.cr -o bin/enumerable/each-vs-loop
+$ crystal build --release --no-debug -o bin/enumerable/each-vs-loop code/enumerable/each-vs-loop.cr
 $ ./bin/enumerable/each-vs-loop
 
-While Loop   6.66M (150.05ns) (± 0.36%) 70.96× slower
-     #each 472.92M (  2.11ns) (± 3.39%)       fastest
+While Loop   6.98M (143.28ns) (± 3.03%)  0 B/op  62.13× slower
+     #each  433.6M (  2.31ns) (± 7.71%)  0 B/op        fastest
 ```
 
 #### `each_with_index` vs `while loop` [code](code/enumerable/each_with_index-vs-while-loop.cr)
 
 ```
-$ crystal build --release code/enumerable/each_with_index-vs-while-loop.cr -o bin/enumerable/each_with_index-vs-while-loop
+$ crystal build --release --no-debug -o bin/enumerable/each_with_index-vs-while-loop code/enumerable/each_with_index-vs-while-loop.cr
 $ ./bin/enumerable/each_with_index-vs-while-loop
 
-     While Loop   8.11M (123.27ns) (± 3.99%) 58.27× slower
-each_with_index 472.68M (  2.12ns) (± 4.05%)       fastest
+     While Loop    8.1M (123.43ns) (± 5.02%)  0 B/op  44.60× slower
+each_with_index 361.34M (  2.77ns) (± 6.85%)  0 B/op        fastest
 ```
 
 #### `map flatten` vs `flat_map` [code](code/enumerable/map-flatten-vs-flat_map.cr)
 
 ```
-$ crystal build --release code/enumerable/map-flatten-vs-flat_map.cr -o bin/enumerable/map-flatten-vs-flat_map
+$ crystal build --release --no-debug -o bin/enumerable/map-flatten-vs-flat_map code/enumerable/map-flatten-vs-flat_map.cr
 $ ./bin/enumerable/map-flatten-vs-flat_map
 
-   Array#flat_map (Tuple)   1.05M (948.81ns) (± 2.42%)       fastest
-Array#map.flatten (Tuple) 694.26k (  1.44µs) (± 4.33%)  1.52× slower
-   Array#flat_map (Array) 227.31k (   4.4µs) (±14.61%)  4.64× slower
-Array#map.flatten (Array)  186.1k (  5.37µs) (± 5.24%)  5.66× slower
+   Array#flat_map (Tuple) 289.77k (  3.45µs) (± 5.90%)  3744 B/op        fastest
+Array#map.flatten (Tuple) 183.04k (  5.46µs) (± 9.06%)  4800 B/op   1.58× slower
+   Array#flat_map (Array)  88.58k ( 11.29µs) (± 3.29%)  7354 B/op   3.27× slower
+Array#map.flatten (Array)  70.09k ( 14.27µs) (± 5.71%)  9616 B/op   4.13× slower
 ```
 
 #### `reverse.each` vs `reverse_each` [code](code/enumerable/reverse.each-vs-reverse_each.cr)
 
 ```
-$ crystal build --release code/enumerable/reverse.each-vs-reverse_each.cr -o bin/enumerable/reverse.each-vs-reverse_each
+$ crystal build --release --no-debug -o bin/enumerable/reverse.each-vs-reverse_each code/enumerable/reverse.each-vs-reverse_each.cr
 $ ./bin/enumerable/reverse.each-vs-reverse_each
 
-Array#reverse.each   3.87M (258.42ns) (± 3.92%) 121.62× slower
-Array#reverse_each 470.62M (  2.12ns) (± 4.66%)        fastest
+Array#reverse.each   1.45M (688.84ns) (± 9.08%)  480 B/op  302.88× slower
+Array#reverse_each  439.7M (  2.27ns) (± 5.99%)    0 B/op         fastest
 ```
 
 #### `sort` vs `sort_by` [code](code/enumerable/sort-vs-sort_by.cr)
 
 ```
-$ crystal build --release code/enumerable/sort-vs-sort_by.cr -o bin/enumerable/sort-vs-sort_by
+$ crystal build --release --no-debug -o bin/enumerable/sort-vs-sort_by code/enumerable/sort-vs-sort_by.cr
 $ ./bin/enumerable/sort-vs-sort_by
 
-   Enumerable#sort 154.12k (  6.49µs) (± 1.24%)  1.14× slower
-Enumerable#sort_by 175.13k (  5.71µs) (± 0.50%)       fastest
+   Enumerable#sort  98.98k (  10.1µs) (± 5.84%)  3136 B/op   1.36× slower
+Enumerable#sort_by 134.82k (  7.42µs) (±10.55%)  1056 B/op        fastest
 ```
 
 ### General
@@ -165,52 +167,52 @@ Enumerable#sort_by 175.13k (  5.71µs) (± 0.50%)       fastest
 #### Assignment [code](code/general/assignment.cr)
 
 ```
-$ crystal build --release code/general/assignment.cr -o bin/general/assignment
+$ crystal build --release --no-debug -o bin/general/assignment code/general/assignment.cr
 $ ./bin/general/assignment
 
-Sequential Assignment 471.82M (  2.12ns) (± 3.91%)  1.00× slower
-  Parallel Assignment 472.29M (  2.12ns) (± 3.58%)       fastest
+Sequential Assignment 487.77M (  2.05ns) (± 7.82%)  0 B/op        fastest
+  Parallel Assignment 472.07M (  2.12ns) (±10.79%)  0 B/op   1.03× slower
 ```
 
 #### `hash` vs `struct` vs `namedtuple` [code](code/general/hash-vs-struct-vs-namedtuple.cr)
 
 ```
-$ crystal build --release code/general/hash-vs-struct-vs-namedtuple.cr -o bin/general/hash-vs-struct-vs-namedtuple
+$ crystal build --release --no-debug -o bin/general/hash-vs-struct-vs-namedtuple code/general/hash-vs-struct-vs-namedtuple.cr
 $ ./bin/general/hash-vs-struct-vs-namedtuple
 
-NamedTuple 471.56M (  2.12ns) (± 3.98%)  1.00× slower
-    Struct 472.26M (  2.12ns) (± 3.58%)       fastest
-      Hash  10.06M ( 99.41ns) (± 3.34%) 46.95× slower
+NamedTuple 479.95M (  2.08ns) (± 8.24%)    0 B/op         fastest
+    Struct 476.01M (   2.1ns) (± 9.78%)    0 B/op    1.01× slower
+      Hash    1.7M (588.98ns) (±10.68%)  290 B/op  282.68× slower
 ```
 
 #### `loop` vs `while_true` [code](code/general/loop-vs-while_true.cr)
 
 ```
-$ crystal build --release code/general/loop-vs-while_true.cr -o bin/general/loop-vs-while_true
+$ crystal build --release --no-debug -o bin/general/loop-vs-while_true code/general/loop-vs-while_true.cr
 $ ./bin/general/loop-vs-while_true
 
- While Loop  19.01  ( 52.62ms) (± 0.67%)  1.00× slower
-Kernel Loop  19.03  ( 52.54ms) (± 0.40%)       fastest
+ While Loop 479.57M (  2.09ns) (±10.34%)  0 B/op        fastest
+Kernel Loop 475.76M (   2.1ns) (± 9.50%)  0 B/op   1.01× slower
 ```
 
 #### `positional_argument` vs `named_argument` [code](code/general/positional_argument-vs-named_argument.cr)
 
 ```
-$ crystal build --release code/general/positional_argument-vs-named_argument.cr -o bin/general/positional_argument-vs-named_argument
+$ crystal build --release --no-debug -o bin/general/positional_argument-vs-named_argument code/general/positional_argument-vs-named_argument.cr
 $ ./bin/general/positional_argument-vs-named_argument
 
-     Named arguments 475.11M (   2.1ns) (± 1.52%)       fastest
-Positional arguments 474.94M (  2.11ns) (± 1.61%)  1.00× slower
+     Named arguments 494.42M (  2.02ns) (± 8.04%)  0 B/op        fastest
+Positional arguments 493.99M (  2.02ns) (± 7.70%)  0 B/op   1.00× slower
 ```
 
 #### `property` vs `getter_and_setter` [code](code/general/property-vs-getter_and_setter.cr)
 
 ```
-$ crystal build --release code/general/property-vs-getter_and_setter.cr -o bin/general/property-vs-getter_and_setter
+$ crystal build --release --no-debug -o bin/general/property-vs-getter_and_setter code/general/property-vs-getter_and_setter.cr
 $ ./bin/general/property-vs-getter_and_setter
 
-         property  43.53M ( 22.97ns) (± 8.82%)  1.18× slower
-getter_and_setter   51.4M ( 19.46ns) (± 3.78%)       fastest
+         property  14.92M ( 67.03ns) (±11.02%)  32 B/op        fastest
+getter_and_setter  14.17M ( 70.58ns) (± 9.49%)  32 B/op   1.05× slower
 ```
 
 ### Hash
@@ -218,66 +220,66 @@ getter_and_setter   51.4M ( 19.46ns) (± 3.78%)       fastest
 #### `bracket` vs `fetch` [code](code/hash/bracket-vs-fetch.cr)
 
 ```
-$ crystal build --release code/hash/bracket-vs-fetch.cr -o bin/hash/bracket-vs-fetch
+$ crystal build --release --no-debug -o bin/hash/bracket-vs-fetch code/hash/bracket-vs-fetch.cr
 $ ./bin/hash/bracket-vs-fetch
 
-   NamedTuple#[]  377.1M (  2.65ns) (± 5.19%)  1.01× slower
-NamedTuple#fetch 380.46M (  2.63ns) (± 2.09%)       fastest
-         Hash#[] 189.26M (  5.28ns) (± 2.88%)  2.01× slower
-      Hash#fetch 190.38M (  5.25ns) (± 2.09%)  2.00× slower
+   NamedTuple#[] 426.67M (  2.34ns) (± 7.66%)  0 B/op        fastest
+NamedTuple#fetch 360.26M (  2.78ns) (± 7.07%)  0 B/op   1.18× slower
+         Hash#[]   56.2M ( 17.79ns) (± 3.55%)  0 B/op   7.59× slower
+      Hash#fetch  55.44M ( 18.04ns) (± 6.82%)  0 B/op   7.70× slower
 ```
 
 #### `clone` vs `dup` [code](code/hash/clone-vs-dup.cr)
 
 ```
-$ crystal build --release code/hash/clone-vs-dup.cr -o bin/hash/clone-vs-dup
+$ crystal build --release --no-debug -o bin/hash/clone-vs-dup code/hash/clone-vs-dup.cr
 $ ./bin/hash/clone-vs-dup
 
-  Hash#dup   6.06M (164.89ns) (±10.42%)       fastest
-Hash#clone 217.41k (   4.6µs) (± 4.79%) 27.90× slower
+  Hash#dup   1.48M (677.85ns) (± 4.39%)   480 B/op        fastest
+Hash#clone  85.93k ( 11.64µs) (± 6.74%)  7381 B/op  17.17× slower
 ```
 
 #### `keys each` vs `each_key` [code](code/hash/keys-each-vs-each_key.cr)
 
 ```
-$ crystal build --release code/hash/keys-each-vs-each_key.cr -o bin/hash/keys-each-vs-each_key
+$ crystal build --release --no-debug -o bin/hash/keys-each-vs-each_key code/hash/keys-each-vs-each_key.cr
 $ ./bin/hash/keys-each-vs-each_key
 
-Hash#keys.each   3.63M (275.47ns) (± 3.90%)  1.24× slower
- Hash#each_key   4.51M ( 221.5ns) (± 0.99%)       fastest
+Hash#keys.each   1.99M (501.85ns) (± 5.25%)  241 B/op   1.48× slower
+ Hash#each_key   2.95M (339.15ns) (± 5.14%)  161 B/op        fastest
 ```
 
 #### `merge bang` vs `[]=` [code](code/hash/merge-bang-vs-[]=.cr)
 
 ```
-$ crystal build --release code/hash/merge-bang-vs-[]=.cr -o bin/hash/merge-bang-vs-[]=
+$ crystal build --release --no-debug -o bin/hash/merge-bang-vs-[]= code/hash/merge-bang-vs-[]=.cr
 $ ./bin/hash/merge-bang-vs-[]=
 
-Hash#merge!   66.8k ( 14.97µs) (± 4.96%)  3.42× slower
-   Hash#[]= 228.18k (  4.38µs) (± 1.98%)       fastest
+Hash#merge!  22.39k ( 44.66µs) (± 9.81%)  26364 B/op   4.01× slower
+   Hash#[]=  89.73k ( 11.14µs) (± 3.62%)   5549 B/op        fastest
 ```
 
-### NamedTuple
+### Namedtuple
 
 #### `bracket` vs `fetch` [code](code/namedtuple/bracket-vs-fetch.cr)
 
 ```
-$ crystal build --release code/namedtuple/bracket-vs-fetch.cr -o bin/namedtuple/bracket-vs-fetch
+$ crystal build --release --no-debug -o bin/namedtuple/bracket-vs-fetch code/namedtuple/bracket-vs-fetch.cr
 $ ./bin/namedtuple/bracket-vs-fetch
 
-   NamedTuple#[] 378.21M (  2.64ns) (± 2.97%)  1.00× slower
-NamedTuple#fetch 378.41M (  2.64ns) (± 2.72%)       fastest
+   NamedTuple#[] 435.05M (   2.3ns) (± 7.49%)  0 B/op        fastest
+NamedTuple#fetch 322.33M (   3.1ns) (±13.36%)  0 B/op   1.35× slower
 ```
 
 #### `fetch` vs `fetch_with_block` [code](code/namedtuple/fetch-vs-fetch_with_block.cr)
 
 ```
-$ crystal build --release code/namedtuple/fetch-vs-fetch_with_block.cr -o bin/namedtuple/fetch-vs-fetch_with_block
+$ crystal build --release --no-debug -o bin/namedtuple/fetch-vs-fetch_with_block code/namedtuple/fetch-vs-fetch_with_block.cr
 $ ./bin/namedtuple/fetch-vs-fetch_with_block
 
-NamedTuple#fetch + const 290.74M (  3.44ns) (± 3.31%)  1.30× slower
-NamedTuple#fetch + block 377.67M (  2.65ns) (± 3.65%)  1.00× slower
-  NamedTuple#fetch + arg 378.19M (  2.64ns) (± 2.77%)       fastest
+NamedTuple#fetch + const 427.08M (  2.34ns) (± 8.51%)  0 B/op        fastest
+NamedTuple#fetch + block 420.77M (  2.38ns) (± 8.93%)  0 B/op   1.01× slower
+  NamedTuple#fetch + arg 334.62M (  2.99ns) (± 8.73%)  0 B/op   1.28× slower
 ```
 
 ### Proc & Block
@@ -285,23 +287,23 @@ NamedTuple#fetch + block 377.67M (  2.65ns) (± 3.65%)  1.00× slower
 #### `block` vs `to_proc` [code](code/proc-and-block/block-vs-to_proc.cr)
 
 ```
-$ crystal build --release code/proc-and-block/block-vs-to_proc.cr -o bin/proc-and-block/block-vs-to_proc
+$ crystal build --release --no-debug -o bin/proc-and-block/block-vs-to_proc code/proc-and-block/block-vs-to_proc.cr
 $ ./bin/proc-and-block/block-vs-to_proc
 
-         Block 278.15k (   3.6µs) (± 3.79%)  1.00× slower
-Symbol#to_proc  278.4k (  3.59µs) (± 4.91%)       fastest
+         Block 204.07k (   4.9µs) (± 6.94%)  2656 B/op        fastest
+Symbol#to_proc 201.83k (  4.95µs) (± 6.60%)  2656 B/op   1.01× slower
 ```
 
 #### `proc call` vs `yield` [code](code/proc-and-block/proc-call-vs-yield.cr)
 
 ```
-$ crystal build --release code/proc-and-block/proc-call-vs-yield.cr -o bin/proc-and-block/proc-call-vs-yield
+$ crystal build --release --no-debug -o bin/proc-and-block/proc-call-vs-yield code/proc-and-block/proc-call-vs-yield.cr
 $ ./bin/proc-and-block/proc-call-vs-yield
 
-    block.call 473.29M (  2.11ns) (± 3.11%)  1.00× slower
- block + yield 473.36M (  2.11ns) (± 3.10%)  1.00× slower
-block argument 473.48M (  2.11ns) (± 3.10%)       fastest
-         yield 473.11M (  2.11ns) (± 3.17%)  1.00× slower
+    block.call 488.06M (  2.05ns) (± 8.06%)  0 B/op   1.06× slower
+ block + yield 488.88M (  2.05ns) (± 9.62%)  0 B/op   1.05× slower
+block argument 505.16M (  1.98ns) (± 8.63%)  0 B/op   1.02× slower
+         yield 515.03M (  1.94ns) (± 6.76%)  0 B/op        fastest
 ```
 
 ### String
@@ -309,82 +311,82 @@ block argument 473.48M (  2.11ns) (± 3.10%)       fastest
 #### Concatenation [code](code/string/concatenation.cr)
 
 ```
-$ crystal build --release code/string/concatenation.cr -o bin/string/concatenation
+$ crystal build --release --no-debug -o bin/string/concatenation code/string/concatenation.cr
 $ ./bin/string/concatenation
 
- String#+  32.98M ( 30.32ns) (±11.62%)       fastest
-String#{}   9.51M (105.16ns) (± 6.12%)  3.47× slower
- String#%    5.0M (200.03ns) (± 4.81%)  6.60× slower
+ String#+  19.77M ( 50.59ns) (±12.91%)   32 B/op        fastest
+String#{}   4.12M (242.65ns) (±12.66%)  208 B/op   4.80× slower
+ String#%    2.8M (357.52ns) (± 7.26%)  178 B/op   7.07× slower
 ```
 
-#### `ends-string-matching-match` vs `end_with` [code](code/string/ends-string-matching-match-vs-end_with.cr)
+#### `ends string-matching-match` vs `end_with` [code](code/string/ends-string-matching-match-vs-end_with.cr)
 
 ```
-$ crystal build --release code/string/ends-string-matching-match-vs-end_with.cr -o bin/string/ends-string-matching-match-vs-end_with
+$ crystal build --release --no-debug -o bin/string/ends-string-matching-match-vs-end_with code/string/ends-string-matching-match-vs-end_with.cr
 $ ./bin/string/ends-string-matching-match-vs-end_with
 
-String#end_with? 376.84M (  2.65ns) (± 4.02%)       fastest
-       String#=~   6.08M (164.37ns) (± 2.65%) 61.94× slower
+String#end_with? 424.08M (  2.36ns) (± 6.47%)   0 B/op        fastest
+       String#=~   6.89M (145.21ns) (± 7.25%)  16 B/op  61.58× slower
 ```
 
-#### `equal substring of char` [code](code/string/equal-substring-of-char.cr)
+#### Equal-substring-of-char [code](code/string/equal-substring-of-char.cr)
 
 ```
-$ crystal build --release code/string/equal-substring-of-char.cr -o bin/string/equal-substring-of-char
+$ crystal build --release --no-debug -o bin/string/equal-substring-of-char code/string/equal-substring-of-char.cr
 $ ./bin/string/equal-substring-of-char
 
-         "==="[0] == '=' 252.73M (  3.96ns) (±12.75%)       fastest
-    "==="[0].to_s == "="  19.65M ( 50.88ns) (± 2.72%) 12.86× slower
-"==="[0] == "=".chars[0]  16.97M ( 58.91ns) (± 3.48%) 14.89× slower
+         "==="[0] == '=' 219.04M (  4.57ns) (± 9.31%)   0 B/op        fastest
+    "==="[0].to_s == "="  15.85M ( 63.11ns) (± 4.95%)  48 B/op  13.82× slower
+"==="[0] == "=".chars[0]  10.79M ( 92.72ns) (±12.59%)  49 B/op  20.31× slower
 ```
 
 #### `equal` vs `match` [code](code/string/equal-vs-match.cr)
 
 ```
-$ crystal build --release code/string/equal-vs-match.cr -o bin/string/equal-vs-match
+$ crystal build --release --no-debug -o bin/string/equal-vs-match code/string/equal-vs-match.cr
 $ ./bin/string/equal-vs-match
 
-String#match  14.97M (  66.8ns) (± 1.47%)  1.02× slower
-  Regexp#===  15.12M ( 66.12ns) (± 3.51%)  1.01× slower
-   String#=~  15.32M ( 65.26ns) (± 4.18%)       fastest
+String#match  11.87M ( 84.22ns) (± 6.21%)  16 B/op   1.01× slower
+  Regexp#===  12.03M (  83.1ns) (± 4.86%)  16 B/op        fastest
+   String#=~  11.49M (  87.0ns) (±11.96%)  16 B/op   1.05× slower
 ```
 
 #### `gsub` vs `sub` [code](code/string/gsub-vs-sub.cr)
 
 ```
-$ crystal build --release code/string/gsub-vs-sub.cr -o bin/string/gsub-vs-sub
+$ crystal build --release --no-debug -o bin/string/gsub-vs-sub code/string/gsub-vs-sub.cr
 $ ./bin/string/gsub-vs-sub
 
- String#sub   3.68M ( 271.6ns) (± 3.01%)       fastest
-String#gsub 644.56k (  1.55µs) (± 1.10%)  5.71× slower
+ String#sub   1.45M (687.91ns) (±12.84%)  1249 B/op        fastest
+String#gsub 832.46k (   1.2µs) (±11.36%)  1249 B/op   1.75× slower
 ```
 
-#### `includes?` vs `to_s.includes?` [code](includes-vs-to_s.includes.cr)
+#### `includes` vs `to_s.includes` [code](code/string/includes-vs-to_s.includes.cr)
 
 ```
-$ crystal build --release code/string/includes-vs-to_s.includes.cr -o bin/string/includes-vs-to_s.includes
+$ crystal build --release --no-debug -o bin/string/includes-vs-to_s.includes code/string/includes-vs-to_s.includes.cr
 $ ./bin/string/includes-vs-to_s.includes
 
-  String#includes? 454.06M (   2.2ns) (±14.78%)       fastest
-Nil#to_s#includes? 440.26M (  2.27ns) (±15.14%)  1.03× slower
+  String#includes?  504.9M (  1.98ns) (± 6.53%)  0 B/op        fastest
+Nil#to_s#includes? 474.74M (  2.11ns) (±10.20%)  0 B/op   1.06× slower
 ```
 
-#### `nil?` vs `to_s.empty?` [code](code/string/nil-vs-to_s.empty.cr)
+#### `nil` vs `to_s.empty` [code](code/string/nil-vs-to_s.empty.cr)
 
 ```
-$ crystal build --release code/string/nil-vs-to_s.empty.cr -o bin/string/nil-vs-to_s.empty
-$ ./bin/string/includes-vs-to_s.includes
+$ crystal build --release --no-debug -o bin/string/nil-vs-to_s.empty code/string/nil-vs-to_s.empty.cr
+$ ./bin/string/nil-vs-to_s.empty
 
-       String#nil? 480.29M (  2.08ns) (± 8.87%)       fastest
-String#to_s#empty? 467.21M (  2.14ns) (±11.46%)  1.03× slower
+    String#nil? 479.32M (  2.09ns) (±10.85%)  0 B/op   1.01× slower
+Nil#to_s#empty?  484.3M (  2.06ns) (± 9.86%)  0 B/op        fastest
 ```
 
 #### `sub` vs `chomp` [code](code/string/sub-vs-chomp.cr)
 
 ```
-$ crystal build --release code/string/sub-vs-chomp.cr -o bin/string/sub-vs-chomp
+$ crystal build --release --no-debug -o bin/string/sub-vs-chomp code/string/sub-vs-chomp.cr
 $ ./bin/string/sub-vs-chomp
 
-String#chomp"string"  37.67M ( 26.55ns) (± 8.27%)       fastest
-  String#sub/regexp/   3.51M ( 284.9ns) (± 5.46%) 10.73× slower
+String#chomp"string"  17.99M ( 55.58ns) (± 5.03%)   32 B/op        fastest
+  String#sub/regexp/   2.27M (441.31ns) (± 4.08%)  176 B/op   7.94× slower
 ```
