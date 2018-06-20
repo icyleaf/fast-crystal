@@ -9,4 +9,4 @@ clean:
 	mkdir bin
 
 build: clean
-	$(CRYSTAL_BIN) build --release -o bin/fast-crystal src/fast-crystal.cr $(CRFLAGS)
+	$(CRYSTAL_BIN) build --release --no-debug -o bin/fast-crystal src/fast-crystal.cr $(CRFLAGS)

@@ -13,7 +13,7 @@ puts "> Test in #{CRYSTAL_VERSION}"
 puts
 
 section = ""
-Dir.glob("code/**/*.cr").each do |file|
+Dir.glob("code/**/*.cr").sort.each do |file|
   test_file = File.basename(file)
   test_section = file.sub(test_file, "").sub("code/", "")[0..-2]
 
