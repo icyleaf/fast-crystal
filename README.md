@@ -398,4 +398,3 @@ String#chomp"string"  17.99M ( 55.58ns) (± 5.03%)   32 B/op        fastest
 - [markd](https://github.com/icyleaf/markd) - Yet another markdown parser built for speed, Compliant to CommonMark specification.
 - [poncho](https://github.com/icyleaf/poncho) - A .env parser/loader improved for performance.
 - [popcorn](https://github.com/icyleaf/popcorn) - Easy and Safe casting from one type to another.
-- [fast-crystal](https://github.com/icyleaf/fast-crystal) - 💨 Writing Fast Crystal 😍 -- Collect Common Crystal idioms.
