@@ -3,25 +3,20 @@ require "benchmark"
 HASH       = {"fast" => "ruby"}
 NAMEDTUPLE = {fast: "ruby"}
 
-def fastest
-  NAMEDTUPLE[:fast]
-end
-
-def faster
-  NAMEDTUPLE.fetch(:fast, "")
-end
-
-def fast
-  HASH["fast"]
-end
-
-def slow
-  HASH.fetch("fast")
-end
-
 Benchmark.ips do |x|
-  x.report("NamedTuple#[]") { fastest }
-  x.report("NamedTuple#fetch") { faster }
-  x.report("Hash#[]") { fast }
-  x.report("Hash#fetch") { slow }
+  x.report("NamedTuple#[]") do
+    NAMEDTUPLE[:fast]
+  end
+
+  x.report("NamedTuple#fetch") do
+    NAMEDTUPLE.fetch(:fast, "")
+  end
+
+  x.report("Hash#[]") do
+    HASH["fast"]
+  end
+
+  x.report("Hash#fetch") do
+    HASH.fetch("fast") { }
+  end
 end
