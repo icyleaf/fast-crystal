@@ -217,7 +217,7 @@ getter_and_setter  50.92M ( 19.64ns) (± 3.84%)  32 B/op        fastest
 
 ### Hash
 
-#### `[]?` vs `has_key?` [code](code/hash/[]?-vs-has_key?.cr)
+#### `[]?` vs `has_key?` [code](code/hash/%5B%5D%3F-vs-has_key%3F.cr)
 
 ```
 $ crystal build --release --no-debug -o bin/hash/[]?-vs-has_key? code/hash/[]?-vs-has_key?.cr
