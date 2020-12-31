@@ -1,8 +1,9 @@
 require "file_utils"
 
-BIN_PATH        = "bin"
+BIN_PATH        = "bin/code"
 SOURCE_PATH     = File.expand_path("code")
-CRYSTAL_VERSION = `crystal -v`
+CRYSTAL_BIN     = `which crystal`.strip
+CRYSTAL_VERSION = `#{CRYSTAL_BIN} -v`.strip
 
 if Dir.exists?(BIN_PATH)
   FileUtils.rm_rf(BIN_PATH)
@@ -34,7 +35,7 @@ files.each do |file|
     puts
   end
 
-  compile_command = ["crystal", "build", "--release", "--no-debug", "-o", bin_file, file]
+  compile_command = [CRYSTAL_BIN, "build", "--release", "--no-debug", "-o", bin_file, file]
   print_title(file)
   puts
   puts "```"
